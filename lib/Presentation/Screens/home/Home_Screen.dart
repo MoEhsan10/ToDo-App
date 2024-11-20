@@ -13,16 +13,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  GlobalKey<TasksTabState> tasksTabKey=GlobalKey();
 int currentIndex=0;
-List<Widget> tabs=[
-TasksTab(),
-SettingsTab(),
-];
+List<Widget> tabs=[];
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabs=[
+      TasksTab(key: tasksTabKey,),
+      SettingsTab(),
+
+    ];
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: buiFab(),
+      floatingActionButton: buildFab(),
       appBar: AppBar(
         backgroundColor: ColorsManager.blue,
         title: Text('ToDo List',style: TextStyle(
@@ -55,11 +63,14 @@ buildBottomNavigationBar()=> BottomAppBar(
     });
   }
 
-  Widget buiFab() => FloatingActionButton(onPressed: () {
-    ShowTaskBottomSheet();
-  },child: Icon(Icons.add),);
+  Widget buildFab() => FloatingActionButton(
+    onPressed: () async {
+      await TaskBottomsheet.show(context); // stop
+      tasksTabKey.currentState?.getTodosFromFireStore();
+    },
+    child: const Icon(
+      Icons.add,
+    ),
+  );
 
-  void ShowTaskBottomSheet() {
-    showModalBottomSheet(context: context, builder: (context) => TaskBottomsheet.show(),);
-  }
 }

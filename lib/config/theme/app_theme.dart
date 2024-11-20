@@ -5,6 +5,11 @@ import 'package:todo_app/core/utils/colors_Manager.dart';
 class AppTheme {
   static ThemeData light = ThemeData(
     useMaterial3: false,
+    primaryColor: ColorsManager.blue,
+    colorScheme: ColorScheme.fromSeed(seedColor: ColorsManager.blue,
+      primary: ColorsManager.blue,
+      onPrimary: ColorsManager.white,
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: ColorsManager.blue,
       titleTextStyle: ApplightStyle.appBarTextStyle
