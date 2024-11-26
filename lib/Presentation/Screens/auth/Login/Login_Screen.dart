@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +45,7 @@ GlobalKey<FormState> formKey =GlobalKey();
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('ToDo',style: ApplightStyle.todoLogo,textAlign: TextAlign.center,),
+        title: Text('To Do',style: ApplightStyle.todoLogo,textAlign: TextAlign.center,),
         centerTitle: true,
       ),
       body: Padding(

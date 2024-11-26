@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDQnsueDCK5LaLVDTPhjGoZvcQrIi3zaw4',
-    appId: '1:592166879581:android:9e9cbf7d093490fb27a8b4',
-    messagingSenderId: '592166879581',
-    projectId: 'todo-app-58fcc',
-    storageBucket: 'todo-app-58fcc.firebasestorage.app',
+    apiKey: 'AIzaSyDTN1fMbeLhkYUtA910XjSRXxnY-JKKST0',
+    appId: '1:10403382589:android:9f2d4bb8d745640d67b154',
+    messagingSenderId: '10403382589',
+    projectId: 'to-do-beb9c',
+    storageBucket: 'to-do-beb9c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA3NEGcK0lYbP0rxSORq4_U6Bh8k9fz38U',
-    appId: '1:592166879581:ios:19c1311df134d69427a8b4',
-    messagingSenderId: '592166879581',
-    projectId: 'todo-app-58fcc',
-    storageBucket: 'todo-app-58fcc.firebasestorage.app',
+    apiKey: 'AIzaSyCzsjmkt3hnBgXrJ8HpPHPIgeDllaf3Ozo',
+    appId: '1:10403382589:ios:c6e23d9ae484929467b154',
+    messagingSenderId: '10403382589',
+    projectId: 'to-do-beb9c',
+    storageBucket: 'to-do-beb9c.firebasestorage.app',
     iosBundleId: 'com.example.todoApp',
   );
+
 }

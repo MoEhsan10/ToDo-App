@@ -21,7 +21,7 @@ class TodoDM{
     id :data['id'],
     title:data['title'],
     description:data['description'],
-    dateTime: data['dateTime'].todate(),
+    dateTime: data['dateTime'].toDate(),
     isDone:data['isDone'],
   );
 }

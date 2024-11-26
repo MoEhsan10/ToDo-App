@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/utils/app_light_Styles.dart';
 import 'package:todo_app/core/utils/date_utils.dart';
 import 'package:todo_app/dataBase_Manager/model/todo_dm.dart';
 import 'package:todo_app/dataBase_Manager/model/user_dm.dart';
-
 class TaskBottomsheet extends StatefulWidget {
   TaskBottomsheet({super.key});
 
@@ -94,7 +94,7 @@ class _TaskBottomsheetState extends State<TaskBottomsheet> {
             SizedBox(height: 12), // Replace Spacer to limit height
             ElevatedButton(
               onPressed: () {
-                addTaskToFireStore();
+                addTodoToFireStore();
               },
               child: Text('Add Task'),
             ),
@@ -116,7 +116,7 @@ class _TaskBottomsheetState extends State<TaskBottomsheet> {
   }
 
 
-  addTaskToFireStore() {
+  void addTodoToFireStore() {
     if (formKey.currentState?.validate() == false) return;
     var db = FirebaseFirestore.instance;
     CollectionReference collectionReference = db
@@ -124,33 +124,37 @@ class _TaskBottomsheetState extends State<TaskBottomsheet> {
         .doc(UserDM.currentUser!.id)
         .collection(TodoDM.collectionName);
     DocumentReference newDoc =
-    collectionReference.doc();
+    collectionReference.doc(); // create new doc and generate it's id
 
     TodoDM todo = TodoDM(
-      id: newDoc.id,
-      title: titleController.text,
-      dateTime: selectedDate.copyWith(
-        second: 0,
-        microsecond: 0,
-        hour: 0,
-        millisecond: 0,
-        minute: 0,
-      ),
-      description: descriptionController.text,
-      isDone: false,
-    );
-    newDoc.set(todo.toFireStore()).then((_) {
+        id: newDoc.id,
+        title: titleController.text,
+        description: descriptionController.text,
+        dateTime: selectedDate.copyWith(
+          second: 0,
+          millisecond: 0,
+          minute: 0,
+          microsecond: 0,
+          hour: 0,
+        ),
+        isDone: false);
+    newDoc.set(todo.toFireStore()).then(
+          (_) {
+        print('Success');
         Navigator.pop(context);
-    })
-        .onError((error, stackTrace) {
-    })
-        .timeout(
-      const Duration(milliseconds: 500),
-      onTimeout: () {
-        Navigator.pop(context);
-        print('Timeout');
       },
-    );
+    ).onError(
+          (error, stackTrace) {
+        print('Error occurred');
+      },
+    ).timeout(
+      const Duration(microseconds: 1),
+      onTimeout: () {
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      },
+    ); // stuck
   }
 
 }

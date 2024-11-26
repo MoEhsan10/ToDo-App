@@ -33,7 +33,7 @@ List<Widget> tabs=[];
       floatingActionButton: buildFab(),
       appBar: AppBar(
         backgroundColor: ColorsManager.blue,
-        title: Text('ToDo List',style: TextStyle(
+        title: Text('To Do List',style: TextStyle(
           fontSize: 22,
           color: Colors.white,
           fontWeight: FontWeight.w700,
