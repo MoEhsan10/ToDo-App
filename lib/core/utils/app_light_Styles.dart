@@ -13,7 +13,7 @@ class ApplightStyle{
   static TextStyle? taskDate =GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.normal, color: ColorsManager.black,);
   static TextStyle? settingsHead =GoogleFonts.poppins(color: ColorsManager.black, fontSize: 16, fontWeight: FontWeight.w700,);
   static TextStyle? settingsSelectedTitle =GoogleFonts.inter(color: ColorsManager.blue, fontSize: 14, fontWeight: FontWeight.w400,);
-  static TextStyle? calenderSelectedItem = GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.w400, color: ColorsManager.blue);
+  static TextStyle? calenderSelectedItem = GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.w700, color: ColorsManager.blue);
   static TextStyle? calenderUnSelectedItem = GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.w400, color: ColorsManager.black);
   static TextStyle? title = GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500, color: ColorsManager.white);
   static TextStyle? todoLogo = GoogleFonts.poppins(fontSize: 40, fontWeight: FontWeight.bold, color: ColorsManager.white);

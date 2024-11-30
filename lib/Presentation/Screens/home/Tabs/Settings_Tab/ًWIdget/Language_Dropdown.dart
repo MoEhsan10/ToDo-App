@@ -44,7 +44,7 @@ class LanguageDropdownState extends State<LanguageDropdown> {
             child: DropdownButton<String>(
               value: selectedLanguage,
               isExpanded: false,
-              icon: Icon(
+              icon:const Icon(
                 Icons.arrow_drop_down,
                 color: ColorsManager.blue,
               ),

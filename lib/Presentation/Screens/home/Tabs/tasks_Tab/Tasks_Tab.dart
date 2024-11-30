@@ -34,7 +34,7 @@ class TasksTabState extends State<TasksTab> {
       children: [
         Stack(
           children: [
-            buildCalenderTimeLine(),
+            buildCalendarTimeLine(),
           ],
         ),
         Expanded(
@@ -54,63 +54,104 @@ class TasksTabState extends State<TasksTab> {
     );
   }
 
-  Widget buildCalenderTimeLine() => EasyInfiniteDateTimeLine(
-    firstDate: DateTime.now().subtract(const Duration(days: 365)),
-    focusDate: calenderSelectedDate,
-    lastDate: DateTime.now().add(const Duration(days: 365)),
+  // Widget buildCalenderTimeLine() => EasyInfiniteDateTimeLine(
+  //   firstDate: DateTime.now().subtract(const Duration(days: 365)),
+  //   focusDate: calenderSelectedDate,
+  //   lastDate: DateTime.now().add(const Duration(days: 365)),
+  //   onDateChange: (selectedDate) {
+  //     setState(() {
+  //       calenderSelectedDate = selectedDate;
+  //       getTodosFromFireStore();
+  //     });
+  //   },
+  //   itemBuilder: (context, date, isSelected, onTap) {
+  //     final isActiveDay = date.day == calenderSelectedDate.day &&
+  //         date.month == calenderSelectedDate.month &&
+  //         date.year == calenderSelectedDate.year;
+  //
+  //     return InkWell(
+  //       onTap: () {
+  //         setState(() {
+  //           calenderSelectedDate = date;
+  //           getTodosFromFireStore();
+  //         });
+  //       },
+  //       child: Card(
+  //         color: ColorsManager.white,
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             Text(
+  //               '${date.day}',
+  //               style: isActiveDay
+  //                   ? ApplightStyle.calenderSelectedItem?.copyWith(
+  //                 color: ColorsManager.blue,
+  //                 fontWeight: FontWeight.bold,
+  //               )
+  //                   : ApplightStyle.calenderUnSelectedItem?.copyWith(
+  //                 color: ColorsManager.black,
+  //                 fontWeight: FontWeight.w400,
+  //               ),
+  //             ),
+  //             Text(
+  //               date.getDayName,
+  //               style: isActiveDay
+  //                   ? ApplightStyle.calenderSelectedItem?.copyWith(
+  //                 color: ColorsManager.blue,
+  //                 fontWeight: FontWeight.bold,
+  //               )
+  //                   : ApplightStyle.calenderUnSelectedItem?.copyWith(
+  //                 color: ColorsManager.black,
+  //                 fontWeight: FontWeight.w400,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     );
+  //   },
+  // );
+  Widget buildCalendarTimeLine() => EasyDateTimeLine(
+    initialDate: DateTime.now(),
     onDateChange: (selectedDate) {
       setState(() {
         calenderSelectedDate = selectedDate;
         getTodosFromFireStore();
       });
     },
-    itemBuilder: (context, date, isSelected, onTap) {
-      final isActiveDay = date.day == calenderSelectedDate.day &&
-          date.month == calenderSelectedDate.month &&
-          date.year == calenderSelectedDate.year;
-
-      return InkWell(
-        onTap: () {
-          setState(() {
-            calenderSelectedDate = date;
-            getTodosFromFireStore();
-          });
-        },
-        child: Card(
-          color: ColorsManager.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${date.day}',
-                style: isActiveDay
-                    ? ApplightStyle.calenderSelectedItem?.copyWith(
-                  color: ColorsManager.blue,
-                  fontWeight: FontWeight.bold,
-                )
-                    : ApplightStyle.calenderUnSelectedItem?.copyWith(
-                  color: ColorsManager.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                date.getDayName,
-                style: isActiveDay
-                    ? ApplightStyle.calenderSelectedItem?.copyWith(
-                  color: ColorsManager.blue,
-                  fontWeight: FontWeight.bold,
-                )
-                    : ApplightStyle.calenderUnSelectedItem?.copyWith(
-                  color: ColorsManager.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
+    headerProps: const EasyHeaderProps(
+      showHeader: true, // Enable the header
+      monthPickerType: MonthPickerType.dropDown,
+      monthStyle:  TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      ),
+      dateFormatter:  DateFormatter.fullDateDMY(),
+     padding:  EdgeInsets.symmetric(horizontal: 16),
+    ),
+    dayProps: EasyDayProps(
+      dayStructure: DayStructure.dayStrDayNum,
+      activeDayStyle: DayStyle(
+        dayNumStyle: ApplightStyle.calenderSelectedItem,
+        dayStrStyle: ApplightStyle.calenderSelectedItem,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-      );
-    },
-  );
+      ),
+      inactiveDayStyle:  DayStyle(
+        dayNumStyle: ApplightStyle.calenderUnSelectedItem,
+        dayStrStyle: ApplightStyle.calenderUnSelectedItem,
+        decoration:const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+      ),
+  ));
+
+
+
 
   void getTodosFromFireStore() async {
     final db = FirebaseFirestore.instance;
